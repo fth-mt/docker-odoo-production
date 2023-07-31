@@ -14,8 +14,20 @@ services:
       - PASSWORD=odoo
     networks:
       - odoo
+  # sqltools:
+  #   container_name: sql-tools
+  #   image: mcr.microsoft.com/mssql-tools
+  sqlserver:
+    container_name: sqlserver-db
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    ports:
+      - "1433:1433"
+    environment:
+      SA_PASSWORD: "557467"
+      #old: change_this_password
+      ACCEPT_EULA: "Y"
   db:
-    image: postgres:13
+    image: postgres:14
     container_name: db-odoo
     environment:
       - POSTGRES_DB=postgres
